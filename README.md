@@ -1,7 +1,7 @@
 Generation of anatomy-realistic 4D infant brain atlases with tissue maps using generative adversarial networks
 ==============================================================================================================
 
-This repository contains the code for the paper 
+This repository contains the code for the ISBI 2024 paper 
 "Generation of anatomy-realistic 4D infant brain atlases with tissue maps using generative adversarial networks"
 by Tang et al. (2024). *Note: this repository is still under construction.*
 
