@@ -11,17 +11,19 @@ The code was originally developed and tested ona a Linux workstation with the fo
 - Python 3.8.17
 - Torch 2.1.0
 - NumPy 1.24.4
+- tqdm 4.67.1
+- Nibabel 5.2.1
 
 Also, for preparation of the data, one should organize their data into something like the following structure:
 ```
 - BCP_train
-    - XXBCP######
+    - XXBCP######_###
         - T1w_rigid.npz
         - T1w_affine.npz
         - T1w_affine_seg.npz
     - ...
 - BCP_test
-    - XXBCP######
+    - XXBCP######_###
         - T1w_rigid.npz
         - T1w_affine.npz
         - T1w_affine_seg.npz
@@ -29,18 +31,28 @@ Also, for preparation of the data, one should organize their data into something
 ```
 where `T1w_rigid.npz` is the rigidly aligned T1w image, `T1w_affine.npz` is the affine aligned T1w image, and `T1w_affine_seg.npz` is the affine aligned segmentation map.
 Note that all the saved arrays are expected to have channel dimension at the very front, i.e., `(C, H, W, D)`.
+In addition, for folder name `XXBCP######_###`, 
+`XX` is the site code, `BCP######` is the subject ID, and `###` is the subject age at MRI (in days).
 See `src/data.py` for more details.
 
 Files
 -----
 - `src/data.py`: Contains utilities for dataset preparation, creating weighted sampler, and creating rough templates.
-- `src/discriminator.py`: Contains augmentations for the discriminator.
+- `src/discriminator_augmentations.py`: Contains augmentations for the discriminator.
 - `src/film.py`: Contains the FiLM mechanism.
 - `src/layers.py`: Contains the custom layers used in the generator and discriminator.
 - `src/losses.py`: Contains the losses used in the training.
 - `src/mean_stream.py`: Contains the `MeanStream` class for collecting running statistics (for loss calculation).
 - `src/networks.py`: Contains the generator and discriminator networks.
 - `src/trilinear.py`: Contains the trilinear interpolation function.
+- `train.py`: The main training script.
+
+Usage
+-----
+To train the model, run the following command:
+```bash
+    python train.py
+```
 
 Acknowledgements
 ----------------
